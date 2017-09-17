@@ -1,0 +1,196 @@
+\documentclass[11pt]{article}
+\usepackage[margin=20mm]{geometry}
+\usepackage{amsmath}
+\usepackage{listings,color,enumitem}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\usepackage{graphicx}
+\title{Problem Set 1\\ \vspace{2mm}\Large{16-642 Manipulation, Estimation, and Control}}
+\author{Matthew Swenson}
+
+\begin{document}
+	\maketitle
+	
+\section{Question 1}
+\begin{enumerate}[label=\Alph*]
+    \item 4
+    \item 1
+    \item 6
+    \item 1
+    \item $\infty$, because the trunk is being modeled as an infinitely variable curve. However, in real life the DOF of an elephant trunk is probably somewhere between 6-8, due to the limited number of major muscle groups in the trunk (the internet varies in the actual number). 
+\end{enumerate}
+\section{Question 2}
+$$
+H^1_0 =
+\begin{bmatrix}
+    &\big[R^0_1\big]^{ -1 }& & \big[R^0_1\big]^{ -1 } d^0_1  \\
+    0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+\section{Question 3}
+$$
+H^1_0 =
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 5 \\
+    0 & 0 & 1 & 6 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & -1& 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}      
+\begin{bmatrix}
+    \frac{1}{2} & \frac{\sqrt{3}}{2} & 0 & 0 \\
+    -\frac{\sqrt{3}}{2}  & \frac{1}{2} & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    \frac{1}{2} & \frac{\sqrt{3}}{2} & 0 & 0 \\
+    0 & 0 & -1 & 5 \\
+    -\frac{\sqrt{3}}{2}  & \frac{1}{2} & 0 & 6 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+\section{Question 4}
+\includegraphics{p4.png}
+\section{Question 5}
+$$
+H^b_w =
+H^b_c H^c_s \big[H^w_t \big]^{-1 }
+$$
+\section{Question 6}
+$$
+H^{Pittsburgh}_{Greenwhich} = 
+H_{Center}^{Pittsburgh} H^{Center}_{Greenwhich} 
+$$
+\begin{align*}
+H_{Center}^{Pittsburgh}=
+\big[H^{Center}_{Pittsburgh}\big]^{-1} &&
+H_{P}^C = 
+H_{P_Z}^C
+H^{P_Z}_{P_Y}
+H^{P_Y}_{P_X}
+\end{align*}
+\begin{align*}
+H_{P_Z}^C = 
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 6000 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
+&&
+H^{P_Z}_{P_Y} =
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \cos{80} & -\sin{80} & 0 \\
+    0 & \sin{80} &\cos{80} & 0 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
+&&
+H^{P_Y}_{P_X} =
+\begin{bmatrix}
+    \cos{40.5} & 0 & -\sin{40.5} & 0 \\
+    0&  1 & 0 & 0 \\
+    \sin{40.5} &0&\cos{40.5} & 0 \\
+    0& 0 & 0 & 1 \\
+\end{bmatrix}
+\end{align*}
+$$
+H_{P}^C = 
+\begin{bmatrix}
+     0.76041 &       0  &  0.64945  &     0   \\
+     0.63958 & 0.17365  & -0.74885  &     0   \\
+    -0.11278 & 0.98481  &  0.13204  &  6000   \\
+       0     &   0      &    0      & 1       \\
+\end{bmatrix}
+$$
+$$
+H^{Center}_{Greenwhich} =
+\begin{bmatrix}
+    \cos{-51} & 0 & -\sin{-51} & 0 \\
+    0&  1 & 0 & 0 \\
+    \sin{-51} &0&\cos{-51} & 6000 \\
+    0& 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+\begin{align*}
+    H^{Pittsburgh}_{Greenwhich}
+&= 
+\begin{bmatrix}
+     0.76041 &       0  &  0.64945  &     0   \\
+     0.63958 & 0.17365  & -0.74885  &     0   \\
+    -0.11278 & 0.98481  &  0.13204  &  6000   \\
+       0     &   0      &    0      & 1       \\
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+    \cos{-51} & 0 & -\sin{-51} & 0 \\
+    0&  1 & 0 & 0 \\
+    \sin{-51} &0&\cos{-51} & 6000 \\
+    0& 0 & 0 & 1 \\
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+     0.41993 &  0.67276 & 0.64691 & -452.46  \\
+    -0.80505 &  0.18266 & 0.7688  &  -6215.4 \\
+     0.47733 & -0.78771 & 0.43919 &   529.76 \\
+       0     &    0     &    0    &    1     \\
+\end{bmatrix}
+\end{align*}
+\section{Question 7}
+We know $p' = Rp$ and $p' = QPQ^*$, where $Q^*=[q_0,-q_1,-q_2,-q_3]^T$ and $P=[0,p_1,p_2,p_3]^T$\\
+Therefore, $Rp = QPQ^*$
+The Hamiltonian product of two quaternions is 
+$$
+(q_1,q_2,q_3,q_4)(p_1,p_2,p_3,p_4)=\left(\begin{array}{c} p_{1}\,q_{1}-p_{2}\,q_{2}-p_{3}\,q_{3}-p_{4}\,q_{4}\\ p_{1}\,q_{2}+p_{2}\,q_{1}+p_{3}\,q_{4}-p_{4}\,q_{3}\\ p_{1}\,q_{3}+p_{3}\,q_{1}-p_{2}\,q_{4}+p_{4}\,q_{2}\\ p_{1}\,q_{4}+p_{2}\,q_{3}-p_{3}\,q_{2}+p_{4}\,q_{1} \end{array}\right)
+$$
+For our specific P and Q, this becomes:
+$$
+QP=\left(\begin{array}{c} -p_{1}\,q_{1}-p_{2}\,q_{2}-p_{3}\,q_{3}\\ p_{1}\,q_{0}-p_{2}\,q_{3}+p_{3}\,q_{2}\\ p_{2}\,q_{0}+p_{1}\,q_{3}-p_{3}\,q_{1}\\ p_{2}\,q_{1}-p_{1}\,q_{2}+p_{3}\,q_{0} \end{array}\right)
+$$
+This is also a quaternion, so:
+\begin{align*}
+Q&PQ^*=\\
+      &\left(\begin{array}{c} q_{1}\,\left(p_{1}\,q_{0}-p_{2}\,q_{3}+p_{3}\,q_{2}\right)-q_{0}\,\left(p_{1}\,q_{1}+p_{2}\,q_{2}+p_{3}\,q_{3}\right)+q_{2}\,\left(p_{2}\,q_{0}+p_{1}\,q_{3}-p_{3}\,q_{1}\right)+q_{3}\,\left(p_{2}\,q_{1}-p_{1}\,q_{2}+p_{3}\,q_{0}\right)\\ q_{0}\,\left(p_{1}\,q_{0}-p_{2}\,q_{3}+p_{3}\,q_{2}\right)+q_{2}\,\left(p_{2}\,q_{1}-p_{1}\,q_{2}+p_{3}\,q_{0}\right)+q_{1}\,\left(p_{1}\,q_{1}+p_{2}\,q_{2}+p_{3}\,q_{3}\right)-q_{3}\,\left(p_{2}\,q_{0}+p_{1}\,q_{3}-p_{3}\,q_{1}\right)\\ q_{0}\,\left(p_{2}\,q_{0}+p_{1}\,q_{3}-p_{3}\,q_{1}\right)-q_{1}\,\left(p_{2}\,q_{1}-p_{1}\,q_{2}+p_{3}\,q_{0}\right)+q_{2}\,\left(p_{1}\,q_{1}+p_{2}\,q_{2}+p_{3}\,q_{3}\right)+q_{3}\,\left(p_{1}\,q_{0}-p_{2}\,q_{3}+p_{3}\,q_{2}\right)\\ q_{0}\,\left(p_{2}\,q_{1}-p_{1}\,q_{2}+p_{3}\,q_{0}\right)+q_{1}\,\left(p_{2}\,q_{0}+p_{1}\,q_{3}-p_{3}\,q_{1}\right)-q_{2}\,\left(p_{1}\,q_{0}-p_{2}\,q_{3}+p_{3}\,q_{2}\right)+q_{3}\,\left(p_{1}\,q_{1}+p_{2}\,q_{2}+p_{3}\,q_{3}\right) \end{array}\right) \\
+Q&PQ^*=\left(\begin{array}{c} 0\\ p_{1}\,{q_{0}}^2+2\,p_{3}\,q_{0}\,q_{2}-2\,p_{2}\,q_{0}\,q_{3}+p_{1}\,{q_{1}}^2+2\,p_{2}\,q_{1}\,q_{2}+2\,p_{3}\,q_{1}\,q_{3}-p_{1}\,{q_{2}}^2-p_{1}\,{q_{3}}^2\\ p_{2}\,{q_{0}}^2-2\,p_{3}\,q_{0}\,q_{1}+2\,p_{1}\,q_{0}\,q_{3}-p_{2}\,{q_{1}}^2+2\,p_{1}\,q_{1}\,q_{2}+p_{2}\,{q_{2}}^2+2\,p_{3}\,q_{2}\,q_{3}-p_{2}\,{q_{3}}^2\\ p_{3}\,{q_{0}}^2+2\,p_{2}\,q_{0}\,q_{1}-2\,p_{1}\,q_{0}\,q_{2}-p_{3}\,{q_{1}}^2+2\,p_{1}\,q_{1}\,q_{3}-p_{3}\,{q_{2}}^2+2\,p_{2}\,q_{2}\,q_{3}+p_{3}\,{q_{3}}^2 \end{array}\right) \\
+Q&PQ^*=\left(\begin{array}{c} 0\\ \left({q_{0}}^2+{q_{1}}^2-{q_{2}}^2-{q_{3}}^2\right)\,p_{1}+\left(2\,q_{1}\,q_{2}-2\,q_{0}\,q_{3}\right)\,p_{2}+\left(2\,q_{0}\,q_{2}+2\,q_{1}\,q_{3}\right)\,p_{3}\\ \left(2\,q_{0}\,q_{3}+2\,q_{1}\,q_{2}\right)\,p_{1}+\left({q_{0}}^2-{q_{1}}^2+{q_{2}}^2-{q_{3}}^2\right)\,p_{2}+\left(2\,q_{2}\,q_{3}-2\,q_{0}\,q_{1}\right)\,p_{3}\\ \left(2\,q_{1}\,q_{3}-2\,q_{0}\,q_{2}\right)\,p_{1}+\left(2\,q_{0}\,q_{1}+2\,q_{2}\,q_{3}\right)\,p_{2}+\left({q_{0}}^2-{q_{1}}^2-{q_{2}}^2+{q_{3}}^2\right)\,p_{3} \end{array}\right) \\
+\end{align*}
+From this last form, we can see that the bottom three entries in the vector have a 
+very similar form to a 3x3 matrix multiplied by $[p1,p2,p3]^T$. Discarding the 0 and pulling out $p$, we get
+$$
+R = 
+\begin{bmatrix}
+{q_{0}}^2+{q_{1}}^2-{q_{2}}^2-{q_{3}}^2 & 2\,q_{1}\,q_{2}-2\,q_{0}\,q_{3}         & 2\,q_{0}\,q_{2}+2\,q_{1}\,q_{3}\\
+2\,q_{0}\,q_{3}+2\,q_{1}\,q_{2}         & {q_{0}}^2-{q_{1}}^2+{q_{2}}^2-{q_{3}}^2 & 2\,q_{2}\,q_{3}-2\,q_{0}\,q_{1}\\
+2\,q_{1}\,q_{3}-2\,q_{0}\,q_{2}         & 2\,q_{0}\,q_{1}+2\,q_{2}\,q_{3}         & {q_{0}}^2-{q_{1}}^2-{q_{2}}^2+{q_{3}}^2
+\end{bmatrix} 
+$$
+\section{Question 8}
+$$
+R_0^1=
+\begin{bmatrix}
+    \cos{\theta_1} & -\sin{\theta_1} & 0 \\
+    \sin{\theta_1} &\cos{\theta_1} & 0 \\
+    0    & 0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+    \cos{\theta_2} & 0 & -\sin{\theta_2} \\
+    0    & 1 & 0 \\
+    \sin{\theta_2} & 0 &\cos{\theta_2} \\
+\end{bmatrix}
+\begin{bmatrix}
+    \cos{\theta_3} & -\sin{\theta_3} & 0 \\
+    \sin{\theta_3} &\cos{\theta_3} & 0 \\
+    0    & 0 & 1 \\
+\end{bmatrix}
+$$
+
+This arrangement of linkages results in a transformaiton matrix similar to a XYX euler angle rotation. 
+
+\end{document}
