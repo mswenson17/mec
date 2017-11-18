@@ -20,15 +20,53 @@
     \item $\infty$, because the trunk is being modeled as an infinitely variable curve. However, in real life the DOF of an elephant trunk is probably somewhere between 6-8, due to the limited number of major muscle groups in the trunk (the internet varies in the actual number). 
 \end{enumerate}
 \section{Question 2}
+We know $H^0_1 H^1_0 = I$. Therefore, we can write: 
+$$
+\begin{bmatrix}
+    R^0_1  & d^0_1  \\
+    \vec{0} & 1
+\end{bmatrix}
+\begin{bmatrix}
+    R^"& & d^"  \\
+    \vec{0} & 1
+\end{bmatrix}
+=
+I
+$$
+$$
+\begin{bmatrix}
+    R^0_1R^"& R^0_1d^"+d^0_1  \\
+    \vec{0} & 1
+\end{bmatrix}
+\begin{bmatrix}
+    R^0_1& & d^0_1  \\
+    \vec{0} & 1
+\end{bmatrix}
+=
+I
+$$
+We can then break this into two separate equations and solve them seprately: 
+\begin{align*}
+R^0_1R^" = I 
+&&
+R^0_1d^"+d^0_1  = 0 
+\\
+R^" = \big[R^0_1\big]^T 
+&& 
+d^"= -\big[R^0_1\big]^T  d^0_1  
+\end{align*}
+Therefore,
 $$
 H^1_0 =
 \begin{bmatrix}
-    &\big[R^0_1\big]^{ -1 }& & \big[R^0_1\big]^{ -1 } d^0_1  \\
-    0 & 0 & 0 & 1
+    \big[R^0_1\big]^{ T} & -\big[R^0_1\big]^{T } d^0_1  \\
+    \vec{0}& 1
 \end{bmatrix}
 $$
-
 \section{Question 3}
+$$
+H^1_0 = Trans_{y,5}Trans_{z,6}Rot_{x,90}Rot_{z,-60}
+$$
 $$
 H^1_0 =
 \begin{bmatrix}
@@ -60,6 +98,19 @@ $$
 \section{Question 4}
 \includegraphics{p4.png}
 \section{Question 5}
+We can write the transformaiton for the screw to the base frame as 
+$$
+H^b_s = H^b_c H^c_s 
+$$
+And we can write the transformaiton for the screwdriver tip to the base frame as 
+$$
+H^b_t = H^b_w H^w_t 
+$$
+Because we want the transformation of $H^b_w$ when the screwdriver tip and screw are colocated,
+we can write
+$$
+ H^b_w H^w_t  =H^b_c H^c_s  
+$$
 $$
 H^b_w =
 H^b_c H^c_s \big[H^w_t \big]^{-1 }
@@ -67,18 +118,14 @@ $$
 \section{Question 6}
 $$
 H^{Pittsburgh}_{Greenwhich} = 
-H_{Center}^{Pittsburgh} H^{Center}_{Greenwhich} 
+H_{Pittsburgh_z}^{Pittsburgh} 
+H_{Pittsburgh_y}^{Pittsburgh_z} 
+H_{Center}^{Pittsburgh_y} 
+H^{Center}_{Greenwhich_y}
+H^{Greenwhich_y}_{Greenwhich} 
 $$
 \begin{align*}
-H_{Center}^{Pittsburgh}=
-\big[H^{Center}_{Pittsburgh}\big]^{-1} &&
-H_{P}^C = 
-H_{P_Z}^C
-H^{P_Z}_{P_Y}
-H^{P_Y}_{P_X}
-\end{align*}
-\begin{align*}
-H_{P_Z}^C = 
+H_{P_z}^P = 
 \begin{bmatrix}
     1 & 0 & 0 & 0 \\
     0 & 1 & 0 & 0 \\
@@ -86,63 +133,51 @@ H_{P_Z}^C =
     0 & 0 & 0 & 1 \\
 \end{bmatrix}
 &&
-H^{P_Z}_{P_Y} =
-\begin{bmatrix}
-    1 & 0 & 0 & 0 \\
-    0 & \cos{80} & -\sin{80} & 0 \\
-    0 & \sin{80} &\cos{80} & 0 \\
-    0 & 0 & 0 & 1 \\
-\end{bmatrix}
-&&
-H^{P_Y}_{P_X} =
+H^{P_z}_{P_y} =
 \begin{bmatrix}
     \cos{40.5} & 0 & -\sin{40.5} & 0 \\
     0&  1 & 0 & 0 \\
     \sin{40.5} &0&\cos{40.5} & 0 \\
     0& 0 & 0 & 1 \\
 \end{bmatrix}
+&&
+H^{P_y}_{C} =
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \cos{80} & -\sin{80} & 0 \\
+    0 & \sin{80} &\cos{80} & 0 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
 \end{align*}
-$$
-H_{P}^C = 
-\begin{bmatrix}
-     0.76041 &       0  &  0.64945  &     0   \\
-     0.63958 & 0.17365  & -0.74885  &     0   \\
-    -0.11278 & 0.98481  &  0.13204  &  6000   \\
-       0     &   0      &    0      & 1       \\
-\end{bmatrix}
-$$
-$$
-H^{Center}_{Greenwhich} =
-\begin{bmatrix}
-    \cos{-51} & 0 & -\sin{-51} & 0 \\
-    0&  1 & 0 & 0 \\
-    \sin{-51} &0&\cos{-51} & 6000 \\
-    0& 0 & 0 & 1 \\
-\end{bmatrix}
-$$
 \begin{align*}
-    H^{Pittsburgh}_{Greenwhich}
-&= 
+H_{G_y}^{C} =
 \begin{bmatrix}
-     0.76041 &       0  &  0.64945  &     0   \\
-     0.63958 & 0.17365  & -0.74885  &     0   \\
-    -0.11278 & 0.98481  &  0.13204  &  6000   \\
-       0     &   0      &    0      & 1       \\
-\end{bmatrix}^{-1}
-\begin{bmatrix}
-    \cos{-51} & 0 & -\sin{-51} & 0 \\
+    \cos{-51} & 0 & \sin{-51} & 0 \\
     0&  1 & 0 & 0 \\
-    \sin{-51} &0&\cos{-51} & 6000 \\
+    -\sin{-51} &0&\cos{-51} & 6000 \\
     0& 0 & 0 & 1 \\
-\end{bmatrix}\\
-&=
+\end{bmatrix}
+&&
+H_{P_z}^P = 
 \begin{bmatrix}
-     0.41993 &  0.67276 & 0.64691 & -452.46  \\
-    -0.80505 &  0.18266 & 0.7688  &  -6215.4 \\
-     0.47733 & -0.78771 & 0.43919 &   529.76 \\
-       0     &    0     &    0    &    1     \\
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & -6000 \\
+    0 & 0 & 0 & 1 \\
 \end{bmatrix}
 \end{align*}
+
+$$
+H_{Greenwhich}^Pittsburgh = 
+\begin{bmatrix}
+    0.56618  &0.63958  & -0.51997 &    3119.8  \\
+    -0.76534  &0.17365 &  -0.61976&     3718.6 \\
+    -0.30609  &0.74885 &   0.58781&     2473.1 \\
+           0  &      0 &         0&          1 \\
+\end{bmatrix}
+$$
+
+
 \section{Question 7}
 We know $p' = Rp$ and $p' = QPQ^*$, where $Q^*=[q_0,-q_1,-q_2,-q_3]^T$ and $P=[0,p_1,p_2,p_3]^T$\\
 Therefore, $Rp = QPQ^*$
@@ -180,9 +215,9 @@ R_0^1=
     0    & 0 & 1 \\
 \end{bmatrix}
 \begin{bmatrix}
-    \cos{\theta_2} & 0 & -\sin{\theta_2} \\
+    \cos{\theta_2} & 0 & \sin{\theta_2} \\
     0    & 1 & 0 \\
-    \sin{\theta_2} & 0 &\cos{\theta_2} \\
+    -\sin{\theta_2} & 0 &\cos{\theta_2} \\
 \end{bmatrix}
 \begin{bmatrix}
     \cos{\theta_3} & -\sin{\theta_3} & 0 \\
@@ -191,6 +226,6 @@ R_0^1=
 \end{bmatrix}
 $$
 
-This arrangement of linkages results in a transformaiton matrix similar to a XYX euler angle rotation. 
+This arrangement of linkages results in a rotation matrix similar to a XYX euler angle rotation. 
 
 \end{document}
